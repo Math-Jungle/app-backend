@@ -3,6 +3,9 @@ package com.appbackend.mathjungle.Service;
 import com.appbackend.mathjungle.Model.Users;
 import com.appbackend.mathjungle.Repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +13,13 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     @Autowired
-    UserRepo userRepo;
+    private UserRepo userRepo;
+
+    @Autowired
+    private AuthenticationManager authManager;
+
+    @Autowired
+    private JWTService jwtService;
 
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
@@ -29,5 +38,18 @@ public class UserService {
         }else {
             return false;
         }
+    }
+
+    public String verify(Users user) {
+
+        Authentication auth = authManager.authenticate(
+                new UsernamePasswordAuthenticationToken(user.getUserName(), user.getPassword()));
+
+        if (auth.isAuthenticated()) {
+            jwtService.generateToken(user.getUserName());
+            return "Success";
+        }
+        return "Failed";
+
     }
 }
