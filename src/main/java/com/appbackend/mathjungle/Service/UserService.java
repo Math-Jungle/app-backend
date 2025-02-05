@@ -21,7 +21,7 @@ public class UserService {
     @Autowired
     private JWTService jwtService;
 
-    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
     public void registerUser(Users user) {
         user.setPassword(encoder.encode(user.getPassword()));
