@@ -31,7 +31,7 @@ public class UserService {
 
     public boolean checkUserDetails(Users user) {
 
-        Users userLogin = userRepo.findByUsername(user.getUserName());
+        Users userLogin = userRepo.findByUserName(user.getUserName());
 
         if (userLogin != null) {
             return true;
@@ -46,10 +46,14 @@ public class UserService {
                 new UsernamePasswordAuthenticationToken(user.getUserName(), user.getPassword()));
 
         if (auth.isAuthenticated()) {
-            jwtService.generateToken(user.getUserName());
-            return "Success";
+            return jwtService.generateToken(user.getUserName());
+
         }
         return "Failed";
 
+    }
+
+       public Users getUserDetailsByUsername(String username) {
+        return userRepo.findByUserName(username);
     }
 }

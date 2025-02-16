@@ -1,6 +1,7 @@
 package com.appbackend.mathjungle.Config;
 
 import com.appbackend.mathjungle.Filter.JwtFilter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,8 +21,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration//This is a configuration class to spring
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
+    @Autowired
     private JwtFilter jwtFilter;
 
     @Autowired
@@ -32,7 +35,7 @@ public class SecurityConfig {
 
         http.csrf(customizer -> customizer.disable());
         http.authorizeHttpRequests(requests -> requests
-                .requestMatchers("user/register" , "user/login").permitAll()
+                .requestMatchers("/user/register" , "/user/login").permitAll()
                 .anyRequest().authenticated()); //Making application to use the authentication
         http.formLogin(Customizer.withDefaults());
         http.httpBasic(Customizer.withDefaults());

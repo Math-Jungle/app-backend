@@ -19,23 +19,9 @@ import java.util.function.Function;
 @Service
 public class JWTService {
 
-    private String secretKey;
+    private String secretKey = "";
 
-    public void generateToken(String username) {
-
-        Map<String, Object> claims = new HashMap<>();
-        Jwts.builder()
-                .claims()
-                .add(claims)
-                .subject(username)
-                .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
-                .and()
-                .signWith(getKey())
-                .compact();
-
-    }
-    public void generateKey(){
+    public JWTService() {
 
         try {
             KeyGenerator keyGen = KeyGenerator.getInstance("HmacSHA256");
@@ -46,13 +32,37 @@ public class JWTService {
         }
     }
 
+    public String generateToken(String username) {
+
+        Map<String, Object> claims = new HashMap<>();
+        return Jwts.builder()
+                .claims()
+                .add(claims)
+                .subject(username)
+                .issuedAt(new Date(System.currentTimeMillis()))
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
+                .and()
+                .signWith(getKey())
+                .compact();
+
+    }
+//    public void generateKey(){
+//
+//        try {
+//            KeyGenerator keyGen = KeyGenerator.getInstance("HmacSHA256");
+//            SecretKey sk = keyGen.generateKey();
+//            secretKey = Base64.getEncoder().encodeToString(sk.getEncoded());
+//        } catch (NoSuchAlgorithmException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+
     public SecretKey getKey() {
-        generateKey();
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String extractUsename(String jwtToken) {
+    public String extractUsername(String jwtToken) {
         return extractClaim(jwtToken, Claims::getSubject);
     }
     public <T> T extractClaim(String jwtToken, Function<Claims,T> claimResolver) {
@@ -70,7 +80,7 @@ public class JWTService {
 
     public boolean validateToken(String jwtToken, UserDetails userDetails) {
 
-        final String username = extractUsename(jwtToken);
+        final String username = extractUsername(jwtToken);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(jwtToken));
     }
 
