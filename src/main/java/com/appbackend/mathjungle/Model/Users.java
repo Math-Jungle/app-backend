@@ -19,7 +19,7 @@ public class Users {
     @Id
     @GeneratedValue
     private int userID;
-    private String userName;
+//    private String userName;
     private String password;
     private String email;
     
@@ -38,13 +38,13 @@ public class Users {
         this.userID = userID;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+//    public String getUserName() {
+//        return userName;
+//    }
+//
+//    public void setUserName(String userName) {
+//        this.userName = userName;
+//    }
 
     public String getPassword() {
         return password;
@@ -80,7 +80,7 @@ public class Users {
     public String toString() {
         return "User{" +
                 "userID=" + userID +
-                ", userName='" + userName + '\'' +
+                ", userName='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

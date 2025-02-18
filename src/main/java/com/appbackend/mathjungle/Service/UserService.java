@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
+
     @Autowired
     private UserRepo userRepo;
 
@@ -31,7 +32,7 @@ public class UserService {
 
     public boolean checkUserDetails(Users user) {
 
-        Users userLogin = userRepo.findByUserName(user.getUserName());
+        Users userLogin = userRepo.findByEmail(user.getEmail());
 
         if (userLogin != null) {
             return true;
@@ -43,17 +44,25 @@ public class UserService {
     public String verify(Users user) {
 
         Authentication auth = authManager.authenticate(
-                new UsernamePasswordAuthenticationToken(user.getUserName(), user.getPassword()));
+                new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
 
         if (auth.isAuthenticated()) {
-            return jwtService.generateToken(user.getUserName());
+            return jwtService.generateToken(user.getEmail());
 
         }
         return "Failed";
 
     }
 
-       public Users getUserDetailsByUsername(String username) {
-        return userRepo.findByUserName(username);
+       public Users getUserDetailsByUsername(String email) {
+        return userRepo.findByEmail(email);
+    }
+
+    public boolean deletUser(int userID) {
+        if (userRepo.existsById(userID)) {
+            userRepo.deleteById(userID);
+            return true;
+        }
+        return false;
     }
 }

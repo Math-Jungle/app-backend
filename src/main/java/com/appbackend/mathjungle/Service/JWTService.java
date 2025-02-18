@@ -32,13 +32,13 @@ public class JWTService {
         }
     }
 
-    public String generateToken(String username) {
+    public String generateToken(String email) {
 
         Map<String, Object> claims = new HashMap<>();
         return Jwts.builder()
                 .claims()
                 .add(claims)
-                .subject(username)
+                .subject(email)
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
                 .and()
@@ -46,16 +46,7 @@ public class JWTService {
                 .compact();
 
     }
-//    public void generateKey(){
-//
-//        try {
-//            KeyGenerator keyGen = KeyGenerator.getInstance("HmacSHA256");
-//            SecretKey sk = keyGen.generateKey();
-//            secretKey = Base64.getEncoder().encodeToString(sk.getEncoded());
-//        } catch (NoSuchAlgorithmException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+
 
     public SecretKey getKey() {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);

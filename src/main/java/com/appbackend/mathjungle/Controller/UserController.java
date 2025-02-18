@@ -42,6 +42,18 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 
     }
+    @GetMapping("/delete/{userID}")
+    public ResponseEntity<Users>delete(Principal principal , @PathVariable int userID){
+        if (principal != null) {
+            String username = principal.getName();
+            boolean status =userService.deletUser(userID);
+            if(status){
+                return ResponseEntity.ok(userService.getUserDetailsByUsername(username));
+            }
+
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
 
 
 
