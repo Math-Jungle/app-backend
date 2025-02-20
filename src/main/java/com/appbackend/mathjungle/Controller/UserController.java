@@ -11,18 +11,18 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
-@Controller
+@RestController
 @RequestMapping("/user")
 public class UserController {
 
     @Autowired
     UserService userService;
 
-    @PostMapping("/register")
-    public ResponseEntity<Users>register(@RequestBody Users user){
-        userService.registerUser(user);
-        return ResponseEntity.ok(user);
-    }
+//    @PostMapping("/register")
+//    public ResponseEntity<Users>register(@RequestBody Users user){
+//        userService.registerUser(user);
+//        return ResponseEntity.ok(user);
+//    }
 
     @PostMapping("/login")
     public ResponseEntity<String>login(@RequestBody Users user){

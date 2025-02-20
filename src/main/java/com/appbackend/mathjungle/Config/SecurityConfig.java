@@ -35,8 +35,9 @@ public class SecurityConfig {
 
         http.csrf(customizer -> customizer.disable());
         http.authorizeHttpRequests(requests -> requests
-                .requestMatchers("/user/register" , "/user/login").permitAll()
-                .anyRequest().authenticated()); //Making application to use the authentication
+                .requestMatchers("/api/register" , "/user/login").permitAll()
+                .anyRequest().authenticated());
+//                .oauth2Login(Customizer.withDefaults()) //Making application to use the authentication
         http.formLogin(Customizer.withDefaults());
         http.httpBasic(Customizer.withDefaults());
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));//Make the session stateless
