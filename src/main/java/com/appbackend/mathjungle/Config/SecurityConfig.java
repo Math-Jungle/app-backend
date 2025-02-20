@@ -35,7 +35,7 @@ public class SecurityConfig {
 
         http.csrf(customizer -> customizer.disable());
         http.authorizeHttpRequests(requests -> requests
-                .requestMatchers("/user/register" , "/user/login").permitAll()
+                .requestMatchers("/api/register" , "/user/login").permitAll()
                 .anyRequest().authenticated());
 //                .oauth2Login(Customizer.withDefaults()) //Making application to use the authentication
         http.formLogin(Customizer.withDefaults());

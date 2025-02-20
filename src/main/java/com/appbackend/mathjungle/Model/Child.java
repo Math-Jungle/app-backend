@@ -14,13 +14,45 @@ public class Child {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String firstName;
-    private String lastName;
+    private String childName;
     private int age;
 
     // One-to-one relationship with the parent's Users entity
     @OneToOne
     @JoinColumn(referencedColumnName = "userID")
     private Users parent;
+
+    public String getChildName() {
+        return childName;
+    }
+
+    public void setChildName(String childName) {
+        this.childName = childName;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+
+    public Users getParent() {
+        return parent;
+    }
+
+    public void setParent(Users parent) {
+        this.parent = parent;
+    }
 }
