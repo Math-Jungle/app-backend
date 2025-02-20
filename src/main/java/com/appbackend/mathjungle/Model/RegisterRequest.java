@@ -15,7 +15,7 @@ public class RegisterRequest {
     private String childName;
     private int childAge;
 //    private String avatar;
-//    // e.g. "boy" or "girl"
+
 
     public String getPassword() {
         return password;
@@ -50,6 +50,5 @@ public class RegisterRequest {
     }
 
 
-    // getters and setters
-    // (or use Lombok @Data / @Getter / @Setter as you prefer)
+
 }
