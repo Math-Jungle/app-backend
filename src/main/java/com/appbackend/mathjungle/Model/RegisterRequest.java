@@ -14,8 +14,15 @@ public class RegisterRequest {
     private String password;
     private String childName;
     private int childAge;
-//    private String avatar;
+    private String avatarId;
 
+    public String getAvatarId() {
+        return avatarId;
+    }
+
+    public void setAvatarId(String avatarId) {
+        this.avatarId = avatarId;
+    }
 
     public String getPassword() {
         return password;
