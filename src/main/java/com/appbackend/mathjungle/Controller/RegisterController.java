@@ -26,6 +26,7 @@ public class RegisterController {
 
     @Autowired
     UserService userService;
+    
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterRequest req) {

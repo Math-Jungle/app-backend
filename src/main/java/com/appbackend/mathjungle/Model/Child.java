@@ -16,11 +16,21 @@ public class Child {
     private Long id;
     private String childName;
     private int age;
+    private String avatarId;
+
 
     // One-to-one relationship with the parent's Users entity
     @OneToOne
     @JoinColumn(referencedColumnName = "userID")
     private Users parent;
+
+    public String getAvatarId() {
+        return avatarId;
+    }
+
+    public void setAvatarId(String avatarId) {
+        this.avatarId = avatarId;
+    }
 
     public String getChildName() {
         return childName;
