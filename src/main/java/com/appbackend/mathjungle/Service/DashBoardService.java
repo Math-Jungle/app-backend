@@ -17,7 +17,7 @@ public class DashBoardService {
 
     public DashBoard getDashBoardData(String email) {
 
-        return dashBoardRepo.findByEmail(email);
+        return dashBoardRepo.findByUserEmail(email);
 
     }
 }
