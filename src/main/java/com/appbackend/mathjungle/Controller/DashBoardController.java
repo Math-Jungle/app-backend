@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
-@RestController("/dashboard")
+@RestController
+@RequestMapping("/dashboard")
 public class DashBoardController {
 
     @Autowired
@@ -22,6 +23,7 @@ public class DashBoardController {
         if (principal == null){
             return new ResponseEntity<>("Invalid JWT token",HttpStatus.UNAUTHORIZED);
         }
+        System.out.println("Token is valid");
         dashBoardService.saveData(dashBoardData);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

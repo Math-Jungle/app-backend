@@ -35,13 +35,13 @@ public class RegisterController {
         user.setEmail(req.getEmail());
         user.setPassword(req.getPassword());
 
-        userService.registerUser(user);
-
         Child child = new Child();
         child.setChildName(req.getChildName());
         child.setAge(req.getChildAge());
         child.setParent(user);
         user.setChildProfile(child);
+
+        userService.registerUser(user);
 
         return ResponseEntity.ok("Registration successful!");
     }
