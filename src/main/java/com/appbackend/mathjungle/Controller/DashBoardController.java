@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
-@RestController("/dashboard")
+@RestController
+@RequestMapping("/dashboard")
 public class DashBoardController {
 
     @Autowired
