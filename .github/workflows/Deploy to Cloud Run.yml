@@ -25,11 +25,11 @@ jobs:
           credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
 
       - name: Configure Docker to Use Google Artifact Registry
-        run: gcloud auth configure-docker us-central1-docker.pkg.dev
+        run: gcloud auth configure-docker asia-south1-docker.pkg.dev
 
       - name: Build and Push Docker Image
         run: |
-          IMAGE_NAME=us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/MathJungle/spring-app
+          IMAGE_NAME=asia-south1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/mathjungle/spring-app
           mvn clean package -DskipTests  # Ensure Maven uses Java 21
           docker build -t $IMAGE_NAME .
           docker push $IMAGE_NAME
@@ -37,7 +37,7 @@ jobs:
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy spring-app \
-            --image=us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/MathJungle/spring-app \
+            --image=asia-south1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/mathjungle/spring-app \
             --platform=managed \
             --region=asia-south1 \
             --allow-unauthenticated
