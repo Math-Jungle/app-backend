@@ -6,7 +6,6 @@ import com.appbackend.mathjungle.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -46,7 +45,7 @@ public class UserController {
     public ResponseEntity<Users>delete(Principal principal , @PathVariable int userID){
         if (principal != null) {
             String username = principal.getName();
-            boolean status =userService.deletUser(userID);
+            boolean status =userService.deleteUser(userID);
             if(status){
                 return ResponseEntity.ok(userService.getUserDetailsByUsername(username));
             }

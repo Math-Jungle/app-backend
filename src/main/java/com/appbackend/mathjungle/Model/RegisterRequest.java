@@ -1,5 +1,6 @@
 package com.appbackend.mathjungle.Model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.*;
 
@@ -14,7 +15,11 @@ public class RegisterRequest {
     private String password;
     private String childName;
     private int childAge;
+
+    @Column(name = "avatar_id")
     private String avatarId;
+
+
 
     public String getAvatarId() {
         return avatarId;

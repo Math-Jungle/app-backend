@@ -29,7 +29,7 @@ public class RegisterController {
     
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody RegisterRequest req) {
+    public ResponseEntity<?> register(@RequestBody RegisterRequest req) {
 
         Users user = new Users();
         user.setEmail(req.getEmail());
@@ -38,6 +38,7 @@ public class RegisterController {
         Child child = new Child();
         child.setChildName(req.getChildName());
         child.setAge(req.getChildAge());
+        child.setAvatarId(req.getAvatarId());
         child.setParent(user);
         user.setChildProfile(child);
 

@@ -58,7 +58,7 @@ public class UserService {
         return userRepo.findByEmail(email);
     }
 
-    public boolean deletUser(int userID) {
+    public boolean deleteUser(int userID) {
         if (userRepo.existsById(userID)) {
             userRepo.deleteById(userID);
             return true;
