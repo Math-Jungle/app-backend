@@ -1,5 +1,7 @@
 package com.appbackend.mathjungle.Controller;
 
+import com.appbackend.mathjungle.DTO.DashBoardDTO;
+import com.appbackend.mathjungle.Mapper.DashBoardMapper;
 import com.appbackend.mathjungle.Model.DashBoard;
 import com.appbackend.mathjungle.Service.DashBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +38,11 @@ public class DashBoardController {
 
         }
         DashBoard data=dashBoardService.getDashBoardData(principal.getName());
-        return new ResponseEntity<>(data,HttpStatus.OK);
+        if (data == null){
+            return new ResponseEntity<>("No dashboard data",HttpStatus.UNAUTHORIZED);
+        }
+        DashBoardDTO dashboardData = DashBoardMapper.toDTO(data);
+        return new ResponseEntity<>(dashboardData,HttpStatus.OK);
 
 
     }
