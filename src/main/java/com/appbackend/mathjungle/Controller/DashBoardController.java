@@ -39,7 +39,7 @@ public class DashBoardController {
         }
         DashBoard data=dashBoardService.getDashBoardData(principal.getName());
         if (data == null){
-            return new ResponseEntity<>("No dashboard data",HttpStatus.UNAUTHORIZED);
+            return  ResponseEntity.ok(null);
         }
         DashBoardDTO dashboardData = DashBoardMapper.toDTO(data);
         return new ResponseEntity<>(dashboardData,HttpStatus.OK);
