@@ -1,7 +1,6 @@
-package com.appbackend.mathjungle.Model;
+package com.appbackend.mathjungle.DTO;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
 import lombok.*;
 
 @Data
@@ -18,7 +17,6 @@ public class RegisterRequest {
 
     @Column(name = "avatar_id")
     private String avatarId;
-
 
 
     public String getAvatarId() {

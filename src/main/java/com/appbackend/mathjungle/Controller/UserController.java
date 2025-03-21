@@ -1,6 +1,8 @@
 package com.appbackend.mathjungle.Controller;
 
 
+import com.appbackend.mathjungle.DTO.HomePageDTO;
+import com.appbackend.mathjungle.Mapper.HomePageMapper;
 import com.appbackend.mathjungle.Model.Users;
 import com.appbackend.mathjungle.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +19,6 @@ public class UserController {
     @Autowired
     UserService userService;
 
-//    @PostMapping("/register")
-//    public ResponseEntity<Users>register(@RequestBody Users user){
-//        userService.registerUser(user);
-//        return ResponseEntity.ok(user);
-//    }
 
     @PostMapping("/login")
     public ResponseEntity<String>login(@RequestBody Users user){
@@ -30,15 +27,20 @@ public class UserController {
     }
 
     @GetMapping("/details")
-    public ResponseEntity<Users>details(Principal principal){
-        // 'principal' is populated by Spring Security once your JwtFilter sets the security context
+    public ResponseEntity<?>details(Principal principal){
 
-        if (principal != null) {
-            String username = principal.getName();
-            Users user = userService.getUserDetailsByUsername(username);
-            return ResponseEntity.ok(user);
+        if (principal == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+
         }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        String username = principal.getName();
+        Users user = userService.getUserDetailsByUsername(username);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+        HomePageDTO data = HomePageMapper.getData(user);
+        return ResponseEntity.ok(data);
+
 
     }
     @GetMapping("/delete/{userID}")

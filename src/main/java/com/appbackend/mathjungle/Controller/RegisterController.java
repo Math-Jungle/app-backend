@@ -1,15 +1,13 @@
 package com.appbackend.mathjungle.Controller;
 
 import com.appbackend.mathjungle.Model.Child;
-import com.appbackend.mathjungle.Model.RegisterRequest;
+import com.appbackend.mathjungle.DTO.RegisterRequest;
 import com.appbackend.mathjungle.Model.Users;
 import com.appbackend.mathjungle.Repo.ChildRepo;
 import com.appbackend.mathjungle.Repo.UserRepo;
 import com.appbackend.mathjungle.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

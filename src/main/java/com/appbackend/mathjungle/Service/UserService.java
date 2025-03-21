@@ -54,7 +54,7 @@ public class UserService {
 
     }
 
-       public Users getUserDetailsByUsername(String email) {
+    public Users getUserDetailsByUsername(String email) {
         return userRepo.findByEmail(email);
     }
 
