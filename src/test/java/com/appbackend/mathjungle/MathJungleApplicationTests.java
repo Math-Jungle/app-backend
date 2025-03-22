@@ -1,14 +1,14 @@
-//package com.appbackend.mathjungle;
-//
-//import org.junit.Test;
-//import org.junit.jupiter.api.Test;
-//import org.springframework.boot.test.context.SpringBootTest;
-//
-//@SpringBootTest
-//class MathJungleApplicationTests {
-//
-//    @Test
-//    void contextLoads() {
-//    }
-//
-//}
+package com.appbackend.mathjungle;
+
+import org.springframework.boot.test.context.SpringBootTest;
+
+import org.junit.jupiter.api.Test;
+@SpringBootTest
+public class MathJungleApplicationTests {
+
+    @Test
+    public void contextLoads() {
+
+    }
+
+}
